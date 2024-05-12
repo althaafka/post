@@ -26,10 +26,12 @@
     <div style="border: 3px solid black">
         <h2>Posts</h2>
         @foreach ($posts as $post)
-            <h3>{{ $post->title }}</h3>
+            <h3>{{ $post->title }} by {{ $post->user->name}}</h3>
             <p>{{ $post['content'] }}</p>
+            <a href="/edit-post/{{$post->id}}"><button>Edit</button></a>
             <form action="/delete-post/{{ $post->id }}" method="POST">
                 @csrf
+                @method('DELETE')
                 <button>Delete</button>
             </form>
         @endforeach
