@@ -23,6 +23,17 @@
         </form>
     </div>
 
+    <div style="border: 3px solid black">
+        <h2>Posts</h2>
+        @foreach ($posts as $post)
+            <h3>{{ $post->title }}</h3>
+            <p>{{ $post['content'] }}</p>
+            <form action="/delete-post/{{ $post->id }}" method="POST">
+                @csrf
+                <button>Delete</button>
+            </form>
+        @endforeach
+
     @else
         <div style="border: 3px solid black">
             <h2>Register</h2>
