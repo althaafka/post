@@ -7,11 +7,22 @@
 <body>
 
     @auth
-        <p>Congrats u are login</p>
-        <form action="/logout" method="POST">
+    <p>Congrats u are login</p>
+    <form action="/logout" method="POST">
+        @csrf
+        <button>Logout</button>
+    </form>
+
+    <div style="border: 3px solid black">
+        <h2>Create a New Post</h2>
+        <form action="/create-post" method="POST">
             @csrf
-            <button>Logout</button>
+            <input type="text" name="title" placeholder="Title"><br><br>
+            <textarea name="content" placeholder="Content ..."></textarea><br><br>
+            <button>Post</button>
         </form>
+    </div>
+
     @else
         <div style="border: 3px solid black">
             <h2>Register</h2>
