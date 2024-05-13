@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = User::create($user_input);
         auth()->login($user);
 
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function login(Request $request){
@@ -37,6 +37,6 @@ class UserController extends Controller
 
     public function logout(){
         auth()->logout();
-        return redirect('/');
+        return redirect('/login');
     }
 }

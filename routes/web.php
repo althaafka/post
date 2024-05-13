@@ -5,24 +5,26 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 
-Route::get('/', function () {
-    $posts = [];
-    if(auth()->check()){
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
         $posts = auth()->user()->posts()->latest()->get();
-    }
-    //$posts = Post::where('user_id', auth()->id())->latest()->get();
-    return view('home', ['posts' => $posts]);
+        return view('home', ['posts' => $posts]);
+    });
+
+    // Other authenticated routes
+    Route::post('/create-post', [PostController::class, 'create']);
+    Route::get('/edit-post/{id}', [PostController::class, 'showEditView']);
+    Route::put('/edit-post/{id}', [PostController::class, 'edit']);
+    Route::delete('/delete-post/{id}', [PostController::class, 'delete']);
 });
 
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/logout', [UserController::class, 'logout']);
+// Unauthenticated routes
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 Route::post('/login', [UserController::class, 'login']);
-
-// Post
-Route::post('/create-post', [PostController::class, 'create']);
-Route::get('/edit-post/{id}', [PostController::class, 'showEditView']);
-Route::put('/edit-post/{id}', [PostController::class, 'edit']);
-Route::delete('/delete-post/{id}', [PostController::class, 'delete']);
+Route::get('/register', function () {
+    return view('register');
+});
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/logout', [UserController::class, 'logout']);

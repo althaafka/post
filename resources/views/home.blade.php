@@ -1,62 +1,41 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('app')
 
-    @auth
-    <p>Congrats u are login</p>
-    <form action="/logout" method="POST">
+@section('content')
+<main id="main" class="flexbox-col">
+
+@auth
+
+    <form action="/create-post" method="POST" class="post-container" style="padding: 1em;">
         @csrf
-        <button>Logout</button>
+        <input type="text" name="title" placeholder="Title">
+        <textarea name="content" placeholder="Content ..."></textarea>
+        <button>Post</button>
     </form>
 
-    <div style="border: 3px solid black">
-        <h2>Create a New Post</h2>
-        <form action="/create-post" method="POST">
-            @csrf
-            <input type="text" name="title" placeholder="Title"><br><br>
-            <textarea name="content" placeholder="Content ..."></textarea><br><br>
-            <button>Post</button>
-        </form>
-    </div>
-
-    <div style="border: 3px solid black">
-        <h2>Posts</h2>
         @foreach ($posts as $post)
-            <h3>{{ $post->title }} by {{ $post->user->name}}</h3>
-            <p>{{ $post['content'] }}</p>
+        <div class="post-container">
+          <div class="post-header">
+            <img src="photo-profile.png" alt="profile">
+            <div style="display: flex; flex-direction: column; margin-left: 20px;">
+              <span style="font-weight: 700;">{{ $post->user->name }}</span>
+              <span style="font-weight: 300;">{{ $post->created_at->diffForHumans() }}</span>
+            </div> 
+          </div>
+          <h1>{{ $post->title }}</h1>
+          <p style="margin: 0 0 20px 0">{!! nl2br(e($post->content)) !!}</p>
+          <div class="edit-post">
             <a href="/edit-post/{{$post->id}}"><button>Edit</button></a>
-            <form action="/delete-post/{{ $post->id }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button>Delete</button>
+            <form action="/delete-post/{{ $post->id }}" method="POST" >
+                  @csrf
+                  @method('DELETE')
+                  <button>Delete</button>
             </form>
+          </div>
+        </div>
         @endforeach
 
     @else
-        <div style="border: 3px solid black">
-            <h2>Register</h2>
-            <form action="/register" method="POST">
-                @csrf
-                <input type="text" name="name" placeholder="Name"><br><br>
-                <input type="email" name="email" placeholder="Email"><br><br>
-                <input type="password" name="password" placeholder="Password"><br><br>
-                <button>Register</button>
-            </form>
-        </div>
-        <div style="border: 3px solid black">
-            <h2>Login</h2>
-            <form action="/login" method="POST">
-                @csrf
-                <input type="text" name="loginname" placeholder="Name"><br><br>
-                <input type="password" name="loginpassword" placeholder="Password"><br><br>
-                <button>Login</button>
-            </form>
-        </div>
-    @endauth
 
-</body>
-</html>
+    @endauth
+@endsection
+</main>
