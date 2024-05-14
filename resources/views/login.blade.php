@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
     <link href="css/auth.css" rel="stylesheet">
-    <link rel="icon" href="/logo.svg" type="image/x-icon">
+    <link rel="icon" href="/images/logo.svg" type="image/x-icon">
 </head>
 <body>
     <div class="background"></div>

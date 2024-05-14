@@ -15,7 +15,7 @@
         @foreach ($posts as $post)
         <div class="post-container">
           <div class="post-header">
-            <img src="photo-profile.png" alt="profile">
+            <img src="/images/photo-profile.png" alt="profile">
             <div style="display: flex; flex-direction: column; margin-left: 20px;">
               <span style="font-weight: 700;">{{ $post->user->name }}</span>
               <span style="font-weight: 300;">{{ $post->created_at->diffForHumans() }}</span>

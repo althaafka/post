@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/home.css" rel="stylesheet">
-    <link rel="icon" href="/logo.svg" type="image/x-icon">
+    <link rel="icon" href="/images/logo.svg" type="image/x-icon">
     <title>Post</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
       <ul class="navbar-items flexbox-col">
         <li class="navbar-logo flexbox-left">
           <a class="navbar-item-inner flexbox">
-            <img src="/logo.svg" alt="logo">
+            <img src="/images/logo.svg" alt="logo">
           </a>
         </li>
         <li class="navbar-item flexbox-left">
@@ -28,7 +28,7 @@
             @csrf
             <button type="submit" class="navbar-item-inner flexbox-left" style="background: none; border: none; cursor: pointer;">
             <div class="navbar-item-inner-icon-wrapper flexbox">
-                <img src="/navbar/logout.svg" alt="logout">
+                <img src="/images/navbar/logout.svg" alt="logout">
             </div>
             <span class="link-text">Logout</span>
         </button>
